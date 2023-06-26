@@ -9,4 +9,27 @@ class StudentsController < ApplicationController
     def show
         render json: @student
     end
+
+    def create
+        @student =Student.new(student_params)
+        if @student.save
+            render json: @student, status: :created
+        else
+            render json: @tudent.errors, status: :unprocessable_entity
+        end
+    end
+
+    def update
+        if @student.update(student_params)
+            render json: @student
+        else
+            render json: @student.errors, status: :unprocessable_entity
+        end
+    end
+
+    def destroy
+        @student.destroy
+        head :no_content
+    end
+    
 end

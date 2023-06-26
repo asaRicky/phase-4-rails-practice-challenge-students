@@ -31,5 +31,14 @@ class StudentsController < ApplicationController
         @student.destroy
         head :no_content
     end
-    
+
+    private
+
+    def set_student
+        @student = Student.fnd(params[:id])
+    end
+
+    def student_params
+        params.require(:student).permit(:name, :major, :age, :instructor_id)
+    end
 end

@@ -26,5 +26,19 @@ class InstructorsController < ApplicationController
             render json: @instructor.errors, status: :unprocessable_entity
         end
     end
-    
+
+    def destroy
+        @instructor.destroy
+        head :no_content
+    end
+
+    private
+
+    def set_instructor
+        @instructor = Instructor.find(params[:id])
+    end
+
+    def instructor_params
+        params.require(:instructor).permit(:name)
+    end
 end
